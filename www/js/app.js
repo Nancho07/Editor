@@ -47,6 +47,7 @@ window.addEventListener("load", function(){
 /****************FIN EDITOR ************************/ 
 function setName(){
         if(conectado !== "No hay coneccion"){
+            datos_usuario.uuid=device.uuid;
             socket.emit('identify', datos_usuario);
         }
     }
@@ -655,12 +656,14 @@ function onAppReady(){
         return false;
     });
     socket.on("nuevaCategoria",function(datos){
+        $("#nuevaCategoria").empty();
         if(datos.catego!="" && datos.catego!=undefined){ 
             $("#categoriaEditorial").append('<option value='+datos.id+'>'+datos.catego+'</option>');
             $('#categoriaEditorial').selectmenu('refresh', true);
         }
     });
     socket.on("nuevoEstado",function(datos){
+        $("#nuevoEstado").empty();
         if(datos.estado!="" && datos.estado!=undefined){
             $("#estadosEditorial").append('<option value='+datos.id+'>'+datos.estado+'</option>');
             $('#estadosEditorial').selectmenu('refresh', true);
